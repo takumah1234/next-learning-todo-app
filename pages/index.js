@@ -9,8 +9,10 @@ import {
   Box,
   Grid,
   Divider,
+  ListItemButton,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Link from 'next/link';
 
 export default function Home() {
   // 変数の宣言
@@ -52,7 +54,9 @@ export default function Home() {
           return (
             <Box key={todoItem.id}>
               <ListItem
-                secondaryAction={<IconButton
+                disablePadding
+                secondaryAction={
+                <IconButton
                   edge="end"
                   onClick={() => {
                     setTodoList(
@@ -63,7 +67,11 @@ export default function Home() {
                   <DeleteIcon />
                 </IconButton>}
               >
-                <ListItemText primary={todoItem.context} />
+                <Link href={`/detail/${todoItem.id}/${todoItem.context}`}>
+                  <ListItemButton>
+                    <ListItemText primary={todoItem.context} />
+                  </ListItemButton>
+                </Link>
               </ListItem>
               <Divider />
             </Box>
