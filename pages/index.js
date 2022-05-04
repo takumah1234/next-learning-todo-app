@@ -25,6 +25,7 @@ export default function Home() {
             fullWidth
             label="やるべきこと"
             size="small"
+            value={todoContext}
             onChange={(e) => {
               setTodoContext(e.target.value);
             }}
@@ -39,6 +40,7 @@ export default function Home() {
                 id: todoList.length,
               };
               setTodoList([...todoList, item]);
+              setTodoContext('');
             }}
           >
             登録
