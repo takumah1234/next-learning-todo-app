@@ -1,7 +1,7 @@
 import { Card, CardContent, Typography, CardActions, Button } from "@mui/material";
 import Link from "next/link";
 
-export default function Post(props) {
+export default function ToDoItemDetail(props) {
     const {id, detail} = props
     
     return (
