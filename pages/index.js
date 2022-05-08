@@ -14,7 +14,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function Home() {
   // 変数の宣言
-  const [todoContext, setTodoContext] = useState('');
+  const [todoContent, setTodoContent] = useState('');
   const [todoList, setTodoList] = useState([]);
 
   return (
@@ -25,9 +25,9 @@ export default function Home() {
             fullWidth
             label="やるべきこと"
             size="small"
-            value={todoContext}
+            value={todoContent}
             onChange={(e) => {
-              setTodoContext(e.target.value);
+              setTodoContent(e.target.value);
             }}
           />
         </Grid>
@@ -36,11 +36,11 @@ export default function Home() {
             variant="contained"
             onClick={() => {
               const item = {
-                context: todoContext,
+                content: todoContent,
                 id: todoList.length,
               };
               setTodoList([...todoList, item]);
-              setTodoContext('');
+              setTodoContent('');
             }}
           >
             登録
@@ -63,7 +63,7 @@ export default function Home() {
                   <DeleteIcon />
                 </IconButton>}
               >
-                <ListItemText primary={todoItem.context} />
+                <ListItemText primary={todoItem.content} />
               </ListItem>
               <Divider />
             </Box>
