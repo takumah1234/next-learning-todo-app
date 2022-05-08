@@ -1,20 +1,40 @@
 import { Card, CardContent, Typography, CardActions, Button } from "@mui/material";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 
 export default function ToDoItemDetail(props) {
-    const {id, detail} = props
+    const { id } = props
+    const [todoItem, setTodoItem] = useState({
+        id: '',
+        context: '',
+    })
     
+    useEffect(() => {
+        async function findTodoItem () {
+            const response = await fetch(`/api/todoListApi/${id}`, {
+              method: "GET",
+            })
+            return await response.json()
+        }
+
+        async function getData() {
+          const gotTodoList = await findTodoItem()
+          setTodoItem(gotTodoList.data)
+        }
+        getData()
+    }, [id])
+
     return (
         <Card sx={{ margin: 'auto', width: '50%' }}>
             <CardContent>
                 <Typography variant="h6" gutterBottom component="div">
                     ID
                 </Typography>
-                {id}
+                {todoItem.id}
                 <Typography variant="h6" gutterBottom component="div">
                     ToDoアイテムの内容
                 </Typography>
-                {detail}
+                {todoItem.context}
             </CardContent>
             <CardActions>
                 <Link href="/">
@@ -26,11 +46,10 @@ export default function ToDoItemDetail(props) {
 }
 
 export async function getServerSideProps(context) {
-    const [id, detail] = context.params.props
+    const id = context.params.id
     return {
       props: {
-          id,
-          detail,
+          id
       },
     }
   }
