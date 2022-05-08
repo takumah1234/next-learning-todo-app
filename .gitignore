@@ -109,4 +109,13 @@ Temporary Items
 # and uncomment the following lines
 # .pnp.*
 
+### Firebase ###
+.idea
+**/node_modules/*
+**/.firebaserc
+
+### Firebase Patch ###
+.runtimeconfig.json
+.firebase/
+
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,macos,yarn
