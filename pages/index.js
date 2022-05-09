@@ -15,7 +15,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Link from 'next/link';
 
 export default function Home() {
-  // 変数の宣言
   const [todoContext, setTodoContext] = useState('');
   const [todoList, setTodoList] = useState([]);
 
@@ -28,10 +27,14 @@ export default function Home() {
   }, [])
 
   async function getTodoItem () {
-    const response = await fetch(`/api/todoListApi/`, {
-      method: "GET",
-    })
-    return await response.json()
+    try{
+      const response = await fetch(`/api/todoListApi/`, {
+        method: "GET",
+      })
+      return await response.json()
+    }catch(error) {
+      throw error
+    }
   }
 
   async function postTodoItem(context) {
