@@ -5,12 +5,11 @@ import { db } from "../util/firebase";
 export async function getToDoList() {
     var result = []
 
-    await getDocs(collection(db, 'todoItems')).then((snapShot) => {
-        snapShot.forEach((item) => {
-            result.push({
-                id: item.id,
-                context: item.data().context,
-            });
+    const snapShot = await getDocs(collection(db, 'todoItems'))
+    snapShot.forEach((item) => {
+        result.push({
+            id: item.id,
+            context: item.data().context,
         });
     });
 
@@ -20,15 +19,14 @@ export async function getToDoList() {
 export async function findTodoItem(id){
     var result = []
 
-    await getDocs(collection(db, 'todoItems')).then((snapShot) => {
-        snapShot.forEach((item) => {
-            if (item.id == id){
-                result.push({
-                    id: item.id,
-                    context: item.data().context,
-                });
-            }
-        });
+    const snapShot = await getDocs(collection(db, 'todoItems'))
+    snapShot.forEach((item) => {
+        if (item.id == id){
+            result.push({
+                id: item.id,
+                context: item.data().context,
+            });
+        }
     });
 
     return result[0]
@@ -46,7 +44,7 @@ export async function saveToDoList(context) {
 
 export async function deleteTodoItem(id){
     try{
-        deleteDoc(doc(db, 'todoItems', id));
+        await deleteDoc(doc(db, 'todoItems', id));
         return id
     }catch (error){
         throw error

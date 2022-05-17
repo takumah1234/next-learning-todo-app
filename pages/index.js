@@ -19,12 +19,10 @@ export default function Home() {
   const [todoList, setTodoList] = useState([]);
 
   useEffect(() => {
-    async function getData() {
-      const gotTodoList = await getTodoItem()
-      setTodoList(gotTodoList.data)
-    }
-    getData()
-  }, [])
+    getTodoItem().then((resultTodoList) => {
+      setTodoList(resultTodoList.data)
+    })
+    }, [])
 
   async function getTodoItem () {
     try{
@@ -90,9 +88,10 @@ export default function Home() {
         <Grid item>
           <Button
             variant="contained"
-            onClick={async () => {
-              const item = await postTodoItem(todoContext);
-              setTodoList([...todoList, item]);
+            onClick={() => {
+              postTodoItem(todoContext).then((item)=>{
+                setTodoList([...todoList, item]);
+              });
               setTodoContext('');
             }}
           >
