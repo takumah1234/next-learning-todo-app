@@ -3,14 +3,10 @@ import Document, {
   Head,
   Main,
   NextScript,
-  DocumentContext,
-  DocumentInitialProps,
 } from "next/document";
 
 class MyDocument extends Document {
-  static async getInitialProps(
-    ctx
-  ) {
+  static async getInitialProps( ctx ) {
     return await Document.getInitialProps(ctx);
   }
 
